@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import { getCountryNameAndFlag } from "@/utils/country";
 import { Button } from "@/components/ui/button";
@@ -14,9 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CircleX } from "lucide-react";
-import Footer from "@/components/Footer";
 
-const Home = () => {
+const FormData = () => {
   const [formData, setFormData] = useState({
     id: "",
     serverId: "",
@@ -76,7 +74,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-5 w-full">
+    <>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Region Check for MLBB</CardTitle>
@@ -156,10 +154,8 @@ const Home = () => {
             </Card>
           );
         })()}
-
-      <Footer />
-    </div>
+    </>
   );
 };
 
-export default Home;
+export default FormData;
