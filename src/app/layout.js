@@ -4,6 +4,7 @@ import "./globals.css";
 const ibmPlexMono = IBM_Plex_Mono({
   weight: "400",
   style: "normal",
+  subsets: ["latin"],
 });
 
 export const metadata = {
