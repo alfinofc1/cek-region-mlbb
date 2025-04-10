@@ -2,26 +2,30 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const formData = await req.formData();
+    const body = await req.json();
 
-    const id = formData.get("id");
-    const serverId = formData.get("serverId");
+    const id = body.id;
+    const serverId = body.serverId;
 
     if (!id || !serverId) {
       return NextResponse.json(
-        { error: "ID and Server ID are required" },
+        { error: "ID and Server ID are required!" },
         { status: 400 }
       );
     }
 
-    const externalForm = new FormData();
-    externalForm.append("id", id);
-    externalForm.append("serverId", serverId);
-    externalForm.append("gameCode", "MLREG4");
+    const payload = {
+      id,
+      serverId,
+      gameCode: "MLREG4",
+    };
 
     const externalRes = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL, {
       method: "POST",
-      body: externalForm,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
     });
 
     const text = await externalRes.text();
@@ -46,7 +50,7 @@ export async function POST(req) {
 
     if (!regionId) {
       return NextResponse.json(
-        { error: "User with this ID and Server not found!" },
+        { error: "Account with this ID and Server not found!" },
         { status: 404 }
       );
     }
@@ -55,7 +59,7 @@ export async function POST(req) {
   } catch (error) {
     console.error("Internal Error:", error);
     return NextResponse.json(
-      { error: "Something went wrong" },
+      { error: "Something went wrong.." },
       { status: 500 }
     );
   }

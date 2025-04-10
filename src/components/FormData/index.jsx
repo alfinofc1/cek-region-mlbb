@@ -30,6 +30,7 @@ const FormData = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setResponse(null);
 
     try {
       const { id, serverId } = formData;
@@ -41,13 +42,12 @@ const FormData = () => {
         return;
       }
 
-      const form = new FormData();
-      form.append("id", id);
-      form.append("serverId", serverId);
-
       const res = await fetch("/api/stalk-ml", {
         method: "POST",
-        body: form,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id, serverId }),
       });
 
       const result = await res.json();
@@ -75,7 +75,7 @@ const FormData = () => {
 
   return (
     <>
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Region Check for MLBB</CardTitle>
           <CardDescription>
@@ -120,7 +120,7 @@ const FormData = () => {
       </Card>
 
       {error && (
-        <Alert className="w-full max-w-sm bg-red-600 text-white">
+        <Alert className="w-full max-w-md bg-red-600 text-white">
           <CircleX />
           <AlertDescription>{error}</AlertDescription>
         </Alert>
@@ -133,10 +133,9 @@ const FormData = () => {
           const regionIdRaw = nicknameRegion[1] || "";
           const regionId = regionIdRaw.replace(/^Region/, "").trim();
           const country = getCountryNameAndFlag(regionId);
-          const isUnknownCountry = country === regionId;
 
           return (
-            <Card className="w-full max-w-sm">
+            <Card className="w-full max-w-md">
               <CardContent className="space-y-1">
                 <p>
                   <strong>ID:</strong> {submittedFormData?.id || "-"}
