@@ -1,9 +1,14 @@
+import Link from "next/link";
+
 const Footer = ({ name }) => {
   const year = new Date().getFullYear();
 
   return (
     <footer>
-      {year} @ {name}
+      {year} @{" "}
+      <Link href="https://mahadisaputra.my.id/" className="underline">
+        {name}
+      </Link>
     </footer>
   );
 };

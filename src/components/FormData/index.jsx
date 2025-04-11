@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CircleX } from "lucide-react";
+import { CircleX, LoaderCircle } from "lucide-react";
 
 const FormData = () => {
   const [formData, setFormData] = useState({
@@ -94,6 +94,7 @@ const FormData = () => {
                   placeholder="1234567890"
                   value={formData.id}
                   onChange={handleChange}
+                  autoComplete="off"
                   required
                 />
               </div>
@@ -106,13 +107,25 @@ const FormData = () => {
                   placeholder="1234"
                   value={formData.serverId}
                   onChange={handleChange}
+                  autoComplete="off"
                   required
                 />
               </div>
             </div>
             <CardFooter className="mt-4 p-0">
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Checking..." : "Check!"}
+              <Button
+                type="submit"
+                className="w-full cursor-pointer"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <LoaderCircle className="animate-spin"></LoaderCircle>{" "}
+                    Checking...
+                  </>
+                ) : (
+                  "Check!"
+                )}
               </Button>
             </CardFooter>
           </form>
