@@ -9,7 +9,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata = {
   title: "Region Check for MLBB",
-  description: "Region Check for MLBB @ MahadiSaputra",
+  description: "Region Check for MLBB @ alfin",
 };
 
 export default function RootLayout({ children }) {

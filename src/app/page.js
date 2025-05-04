@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-5 w-full">
       <FormData />
-      <Footer name="Mahadi Saputra" />
+      <Footer name="Alfin" />
     </div>
   );
 };
